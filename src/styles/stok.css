@@ -1,0 +1,302 @@
+/* =============================================
+   AFI DECORATION — Stok Management Page
+   ============================================= */
+
+/* ── Stock Stats ── */
+.stok-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.stok-stat {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.stok-stat__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stok-stat__icon.total {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--green-400);
+}
+
+.stok-stat__icon.baik {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+}
+
+.stok-stat__icon.rusak {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+.stok-stat__icon.paket {
+  background: rgba(168, 85, 247, 0.1);
+  color: #c084fc;
+}
+
+.stok-stat__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stok-stat__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stok-stat__value {
+  font-family: var(--font-primary);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stok-stat__label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── Stok Table Area ── */
+.stok-content {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.stok-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--dark-border-subtle);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.stok-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.stok-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ── Stock Item Row ── */
+.stok-item-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--dark-border-subtle);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.stok-item-row:last-child {
+  border-bottom: none;
+}
+
+.stok-item-row:hover {
+  background: rgba(34, 197, 94, 0.02);
+}
+
+.stok-item__img {
+  width: 44px;
+  height: 44px;
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: 20px;
+}
+
+.stok-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.stok-item__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.stok-item__category {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.stok-item__stock {
+  text-align: center;
+  min-width: 80px;
+}
+
+.stok-item__stock-value {
+  font-family: var(--font-primary);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.stok-item__stock-label {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.stok-item__price {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--green-400);
+  min-width: 100px;
+  text-align: right;
+}
+
+.stok-item__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ── Add Stock Form ── */
+.stok-form-type {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.stok-type-option {
+  background: var(--dark-surface);
+  border: 2px solid var(--dark-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.stok-type-option:hover {
+  border-color: var(--green-700);
+}
+
+.stok-type-option.selected {
+  border-color: var(--green-500);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.stok-type-option__icon {
+  font-size: 28px;
+  margin-bottom: var(--space-2);
+}
+
+.stok-type-option__name {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.stok-type-option__desc {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* ── Package Composition Editor ── */
+.paket-composer {
+  margin-top: var(--space-4);
+}
+
+.paket-composer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.paket-composer__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.paket-composer__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-md);
+}
+
+.paket-composer__item-name {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.paket-composer__item-qty {
+  width: 70px;
+}
+
+.paket-composer__item-remove {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.paket-composer__item-remove:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .stok-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stok-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stok-form-type {
+    grid-template-columns: 1fr;
+  }
+
+  .stok-item-row {
+    flex-wrap: wrap;
+  }
+}

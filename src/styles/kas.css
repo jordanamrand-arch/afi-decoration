@@ -1,0 +1,189 @@
+/* =============================================
+   AFI DECORATION — Arus Kas (Cash Flow) Page
+   ============================================= */
+
+/* ── Kas Summary Row ── */
+.kas-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.kas-summary-card {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.kas-summary-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kas-summary-card__icon.inflow {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--green-400);
+}
+
+.kas-summary-card__icon.outflow {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+.kas-summary-card__icon.balance {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+}
+
+.kas-summary-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.kas-summary-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.kas-summary-card__label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.kas-summary-card__value {
+  font-family: var(--font-primary);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.kas-summary-card__value.inflow {
+  color: var(--green-400);
+}
+
+.kas-summary-card__value.outflow {
+  color: #f87171;
+}
+
+/* ── Kas Content Area ── */
+.kas-content {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.kas-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--dark-border-subtle);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.kas-toolbar__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ── Kas Table Specific ── */
+.kas-table td.amount {
+  font-family: var(--font-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.kas-table td.amount.inflow {
+  color: var(--green-400);
+}
+
+.kas-table td.amount.outflow {
+  color: #f87171;
+}
+
+.kas-table .kas-category {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.kas-table .kas-category__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kas-category__dot.sewa { background: var(--green-500); }
+.kas-category__dot.dp { background: var(--emerald-400); }
+.kas-category__dot.pelunasan { background: var(--teal-400); }
+.kas-category__dot.operasional { background: #f59e0b; }
+.kas-category__dot.pembelian { background: #ef4444; }
+.kas-category__dot.gaji { background: #8b5cf6; }
+.kas-category__dot.transport { background: #ec4899; }
+.kas-category__dot.lainnya { background: #6b7280; }
+
+/* ── Kas Form ── */
+.kas-form__type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.kas-type-btn {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-weight: var(--weight-medium);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+  border: 2px solid var(--dark-border);
+  background: var(--dark-surface);
+  color: var(--text-secondary);
+}
+
+.kas-type-btn:hover {
+  border-color: var(--dark-hover);
+}
+
+.kas-type-btn.active.inflow {
+  border-color: var(--green-500);
+  background: rgba(34, 197, 94, 0.08);
+  color: var(--green-400);
+}
+
+.kas-type-btn.active.outflow {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+}
+
+.kas-type-btn__icon {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+}
+
+.kas-type-btn__label {
+  font-size: var(--text-sm);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .kas-summary {
+    grid-template-columns: 1fr;
+  }
+}

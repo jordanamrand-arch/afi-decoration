@@ -1,0 +1,19 @@
+{
+  "name": "afi-decoration",
+  "version": "1.0.0",
+  "description": "Sistem Operasional Wedding & Event AFI Decoration",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=5000"
+  },
+  "keywords": [
+    "wedding",
+    "decoration",
+    "dashboard"
+  ],
+  "author": "Admin AFI",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
