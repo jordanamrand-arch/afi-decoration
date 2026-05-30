@@ -16,6 +16,9 @@ const App = {
     // Init data store
     DataStore.init();
 
+    // Theme initialization
+    this.initTheme();
+
     // Handle hash routing
     this.handleRoute();
     window.addEventListener('hashchange', () => this.handleRoute());
@@ -25,6 +28,38 @@ const App = {
 
     // Mobile toggle
     this.initMobileNav();
+  },
+
+  initTheme() {
+    const savedTheme = localStorage.getItem('afi_theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    
+    const initialTheme = savedTheme || (prefersLight ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    
+    // Expose global toggle function for page components
+    window.toggleTheme = () => this.toggleTheme();
+  },
+
+  toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('afi_theme', newTheme);
+    
+    // Re-render current page to update toggle button UI if needed
+    const moduleMap = {
+      dashboard: DashboardPage,
+      booking: BookingPage,
+      stok: StokPage,
+      kas: KasPage,
+    };
+    const pageEl = document.getElementById(`page-${this.currentPage}`);
+    const module = moduleMap[this.currentPage];
+    if (pageEl && module) {
+      pageEl.innerHTML = module.render();
+      if (module.init) module.init();
+    }
   },
 
   handleRoute() {
