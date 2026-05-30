@@ -131,7 +131,8 @@ const DataStore = {
       }
       
       // Seed local storage if empty as fallback
-      if (!this.getAll(this.KEYS.BOOKINGS).length) {
+      const hasBeenSeeded = localStorage.getItem('afi_seeded') === 'true';
+      if (!hasBeenSeeded && !this.getAll(this.KEYS.BOOKINGS).length) {
         this.seedData();
       }
     }
@@ -351,6 +352,9 @@ const DataStore = {
     if (Object.keys(localCounters).length > 0) {
       localStorage.setItem(this.KEYS.COUNTER, JSON.stringify(localCounters));
     }
+    
+    // Tandai bahwa data sudah disinkronisasi/diinisialisasi agar dummy tidak muncul lagi
+    localStorage.setItem('afi_seeded', 'true');
   },
 
   async queueWrite(table, data, isInsert = true) {
@@ -889,6 +893,8 @@ CREATE POLICY "Public access counters" ON afi_counters FOR ALL USING (true) WITH
 
   // ── Seed Data ──
   seedData() {
+    if (localStorage.getItem('afi_seeded') === 'true') return;
+    
     // Sample stok items
     const stokItems = [
       { id: 'STK-0001', nama: 'Tenda Dekorasi 4x6', kategori: 'Tenda', totalStok: 8, stokTersedia: 5, hargaSewa: 2500000, kondisi: 'baik', createdAt: '2026-05-01T08:00:00Z' },
