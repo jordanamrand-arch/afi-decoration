@@ -805,9 +805,22 @@ CREATE POLICY "Public access counters" ON afi_counters FOR ALL USING (true) WITH
       .filter(k => k.tipe === 'outflow')
       .reduce((sum, k) => sum + k.nominal, 0);
 
+    // Kategori Biaya Langsung (HPP): pembelian barang/transport terkait event
+    const biayaLangsung = kas
+      .filter(k => k.tipe === 'outflow' && ['pembelian', 'transport'].includes(k.kategori))
+      .reduce((sum, k) => sum + k.nominal, 0);
+
+    // Kategori Biaya Operasional: gaji bulanan, operasional, lainnya
+    const biayaOperasional = kas
+      .filter(k => k.tipe === 'outflow' && ['gaji', 'operasional', 'lainnya'].includes(k.kategori))
+      .reduce((sum, k) => sum + k.nominal, 0);
+
     const totalPiutang = bookings
       .filter(b => b.status !== 'lunas' && b.status !== 'batal')
       .reduce((sum, b) => sum + ((b.totalBiaya || 0) - (b.dp || 0)), 0);
+
+    const labaKotor = totalInflow - biayaLangsung;
+    const labaBersih = labaKotor - biayaOperasional; 
 
     return {
       omset: totalInflow,
@@ -815,6 +828,10 @@ CREATE POLICY "Public access counters" ON afi_counters FOR ALL USING (true) WITH
       sisaKas: totalInflow - totalOutflow,
       totalInflow,
       totalOutflow,
+      biayaLangsung,
+      biayaOperasional,
+      labaKotor,
+      labaBersih,
     };
   },
 

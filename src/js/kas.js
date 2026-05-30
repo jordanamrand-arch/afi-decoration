@@ -53,6 +53,24 @@ const KasPage = {
             <div class="kas-summary-card__value">${formatCurrency(summary.sisaKas)}</div>
           </div>
         </div>
+        <div class="kas-summary-card">
+          <div class="kas-summary-card__icon" style="background: rgba(168, 85, 247, 0.1); color: #c084fc;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="kas-summary-card__info">
+            <div class="kas-summary-card__label">Laba Kotor</div>
+            <div class="kas-summary-card__value" style="color: #c084fc;">${formatCurrency(summary.labaKotor)}</div>
+          </div>
+        </div>
+        <div class="kas-summary-card">
+          <div class="kas-summary-card__icon" style="background: rgba(236, 72, 153, 0.1); color: #f472b6;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5-5-4 4-5-5"/></svg>
+          </div>
+          <div class="kas-summary-card__info">
+            <div class="kas-summary-card__label">Laba Bersih</div>
+            <div class="kas-summary-card__value" style="color: #f472b6;">${formatCurrency(summary.labaBersih)}</div>
+          </div>
+        </div>
       </div>
 
       <!-- Transactions Table -->
