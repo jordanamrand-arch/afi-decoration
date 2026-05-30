@@ -797,9 +797,33 @@ CREATE POLICY "Public access counters" ON afi_counters FOR ALL USING (true) WITH
     const kas = this.getAllKas();
     const bookings = this.getAllBookings();
 
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    
+    const isThisMonth = (dateStr) => {
+      const d = new Date(dateStr);
+      return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+    };
+    
+    const isLastMonth = (dateStr) => {
+      const d = new Date(dateStr);
+      let prevMonth = currentMonth - 1;
+      let prevYear = currentYear;
+      if (prevMonth < 0) {
+        prevMonth = 11;
+        prevYear -= 1;
+      }
+      return d.getMonth() === prevMonth && d.getFullYear() === prevYear;
+    };
+
     const totalInflow = kas
       .filter(k => k.tipe === 'inflow')
       .reduce((sum, k) => sum + k.nominal, 0);
+
+    const inflowThisMonth = kas.filter(k => k.tipe === 'inflow' && isThisMonth(k.createdAt)).reduce((s, k) => s + k.nominal, 0);
+    const inflowLastMonth = kas.filter(k => k.tipe === 'inflow' && isLastMonth(k.createdAt)).reduce((s, k) => s + k.nominal, 0);
+    const omsetTrend = inflowLastMonth === 0 ? (inflowThisMonth > 0 ? 100 : 0) : Math.round(((inflowThisMonth - inflowLastMonth) / inflowLastMonth) * 100);
 
     const totalOutflow = kas
       .filter(k => k.tipe === 'outflow')
@@ -819,6 +843,10 @@ CREATE POLICY "Public access counters" ON afi_counters FOR ALL USING (true) WITH
       .filter(b => b.status !== 'lunas' && b.status !== 'batal')
       .reduce((sum, b) => sum + ((b.totalBiaya || 0) - (b.dp || 0)), 0);
 
+    const piutangThisMonth = bookings.filter(b => b.status !== 'lunas' && b.status !== 'batal' && isThisMonth(b.createdAt)).reduce((sum, b) => sum + ((b.totalBiaya || 0) - (b.dp || 0)), 0);
+    const piutangLastMonth = bookings.filter(b => b.status !== 'lunas' && b.status !== 'batal' && isLastMonth(b.createdAt)).reduce((sum, b) => sum + ((b.totalBiaya || 0) - (b.dp || 0)), 0);
+    const piutangTrend = piutangLastMonth === 0 ? (piutangThisMonth > 0 ? 100 : 0) : Math.round(((piutangThisMonth - piutangLastMonth) / piutangLastMonth) * 100);
+
     const labaKotor = totalInflow - biayaLangsung;
     const labaBersih = labaKotor - biayaOperasional; 
 
@@ -832,6 +860,8 @@ CREATE POLICY "Public access counters" ON afi_counters FOR ALL USING (true) WITH
       biayaOperasional,
       labaKotor,
       labaBersih,
+      omsetTrend,
+      piutangTrend
     };
   },
 

@@ -31,9 +31,13 @@ const DashboardPage = {
             <div class="summary-card__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
-            <div class="summary-card__trend up">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-              +12%
+            <div class="summary-card__trend ${summary.omsetTrend >= 0 ? 'up' : 'down'}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                ${summary.omsetTrend >= 0 
+                  ? '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>' 
+                  : '<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>'}
+              </svg>
+              ${summary.omsetTrend >= 0 ? '+' : ''}${summary.omsetTrend}%
             </div>
           </div>
           <div class="summary-card__value">${formatCurrency(summary.omset)}</div>
@@ -45,9 +49,13 @@ const DashboardPage = {
             <div class="summary-card__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <div class="summary-card__trend down">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>
-              -5%
+            <div class="summary-card__trend ${summary.piutangTrend >= 0 ? 'up' : 'down'}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                ${summary.piutangTrend >= 0 
+                  ? '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>' 
+                  : '<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>'}
+              </svg>
+              ${summary.piutangTrend >= 0 ? '+' : ''}${summary.piutangTrend}%
             </div>
           </div>
           <div class="summary-card__value">${formatCurrency(summary.piutang)}</div>
