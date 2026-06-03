@@ -22,7 +22,7 @@ const InvoicePage = {
           itemsHtml += `
             <tr>
               <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; color: #a3c9b2;">${i + 1}</td>
-              <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; color: #f0fdf4;">${k.nama}</td>
+              <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; color: #f0fdf4;">${Components.escapeHTML(k.nama)}</td>
               <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; text-align: center; color: #a3c9b2;">${k.qty}</td>
               <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; text-align: right; color: #a3c9b2;">-</td>
               <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; text-align: right; color: #a3c9b2;">-</td>
@@ -31,7 +31,7 @@ const InvoicePage = {
         });
         itemsHtml += `
           <tr>
-            <td colspan="4" style="padding: 10px 12px; text-align: right; font-weight: 600; color: #f0fdf4;">Harga Paket: ${booking.paketNama}</td>
+            <td colspan="4" style="padding: 10px 12px; text-align: right; font-weight: 600; color: #f0fdf4;">Harga Paket: ${Components.escapeHTML(booking.paketNama)}</td>
             <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #4ade80; font-size: 16px;">${formatCurrency(booking.totalBiaya)}</td>
           </tr>
         `;
@@ -42,7 +42,7 @@ const InvoicePage = {
         itemsHtml += `
           <tr>
             <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; color: #a3c9b2;">${i + 1}</td>
-            <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; color: #f0fdf4;">${item.nama}</td>
+            <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; color: #f0fdf4;">${Components.escapeHTML(item.nama)}</td>
             <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; text-align: center; color: #a3c9b2;">${item.qty}</td>
             <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; text-align: right; color: #a3c9b2;">${formatCurrency(item.harga)}</td>
             <td style="padding: 8px 12px; border-bottom: 1px solid #1e3226; text-align: right; color: #a3c9b2;">${formatCurrency(subtotal)}</td>
@@ -83,15 +83,15 @@ const InvoicePage = {
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
           <div style="background: #142019; padding: 16px; border-radius: 12px; border: 1px solid #1e3226;">
             <div style="font-size: 11px; text-transform: uppercase; color: #5f8a6e; letter-spacing: 1px; margin-bottom: 8px;">Ditagihkan Kepada</div>
-            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">${booking.namaKlien}</div>
-            <div style="font-size: 13px; color: #a3c9b2;">${booking.kontak}</div>
+            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">${Components.escapeHTML(booking.namaKlien)}</div>
+            <div style="font-size: 13px; color: #a3c9b2;">${Components.escapeHTML(booking.kontak)}</div>
           </div>
           <div style="background: #142019; padding: 16px; border-radius: 12px; border: 1px solid #1e3226;">
             <div style="font-size: 11px; text-transform: uppercase; color: #5f8a6e; letter-spacing: 1px; margin-bottom: 8px;">Detail Acara</div>
             <div style="font-size: 13px; color: #a3c9b2; line-height: 1.6;">
               <strong style="color: #f0fdf4;">Tanggal:</strong> ${formatDate(booking.tanggalAcara)}<br>
-              <strong style="color: #f0fdf4;">Venue:</strong> ${booking.venue}<br>
-              <strong style="color: #f0fdf4;">Tipe:</strong> ${booking.paketNama || 'Mix & Match'}
+              <strong style="color: #f0fdf4;">Venue:</strong> ${Components.escapeHTML(booking.venue)}<br>
+              <strong style="color: #f0fdf4;">Tipe:</strong> ${Components.escapeHTML(booking.paketNama) || 'Mix & Match'}
             </div>
           </div>
         </div>

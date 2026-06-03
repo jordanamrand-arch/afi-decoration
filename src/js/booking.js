@@ -76,10 +76,10 @@ const BookingPage = {
           <span class="badge ${status.badge} badge-dot">${status.text}</span>
         </div>
         <div class="booking-card__client">
-          <div class="booking-card__name">${b.namaKlien}</div>
+          <div class="booking-card__name">${Components.escapeHTML(b.namaKlien)}</div>
           <div class="booking-card__contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            ${b.kontak}
+            ${Components.escapeHTML(b.kontak)}
           </div>
         </div>
         <div class="booking-card__meta">
@@ -93,11 +93,11 @@ const BookingPage = {
           </div>
           <div class="booking-card__meta-item">
             <span class="booking-card__meta-label">Venue</span>
-            <span class="booking-card__meta-value">${b.venue}</span>
+            <span class="booking-card__meta-value">${Components.escapeHTML(b.venue)}</span>
           </div>
           <div class="booking-card__meta-item">
             <span class="booking-card__meta-label">Paket</span>
-            <span class="booking-card__meta-value">${b.paketNama || 'Mix & Match'}</span>
+            <span class="booking-card__meta-value">${Components.escapeHTML(b.paketNama) || 'Mix & Match'}</span>
           </div>
         </div>
         <div class="booking-card__footer">
@@ -197,10 +197,10 @@ const BookingPage = {
             <div class="package-list">
               ${paketList.map(p => `
                 <div class="package-item" data-paket-id="${p.id}">
-                  <div class="package-item__name">${p.nama}</div>
+                  <div class="package-item__name">${Components.escapeHTML(p.nama)}</div>
                   <div class="package-item__price">${formatCurrency(p.hargaBase)}</div>
                   <div class="package-item__components">
-                    ${p.komponen.map(k => `• ${k.nama} (${k.qty}x)`).join('<br>')}
+                    ${p.komponen.map(k => `• ${Components.escapeHTML(k.nama)} (${k.qty}x)`).join('<br>')}
                   </div>
                 </div>
               `).join('')}
@@ -217,7 +217,7 @@ const BookingPage = {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
                   <div class="mix-match-item__info">
-                    <div class="mix-match-item__name">${item.nama}</div>
+                    <div class="mix-match-item__name">${Components.escapeHTML(item.nama)}</div>
                     <div class="mix-match-item__stock">Tersedia: ${item.stokTersedia || item.totalStok} unit</div>
                   </div>
                   <input type="number" class="form-input mix-match-item__qty" min="1" value="1" data-item-id="${item.id}" style="display:none">
@@ -389,7 +389,7 @@ const BookingPage = {
       if (paket) {
         total = paket.hargaBase;
         rows = `<div class="payment-summary__row">
-          <span class="payment-summary__label">${paket.nama}</span>
+          <span class="payment-summary__label">${Components.escapeHTML(paket.nama)}</span>
           <span class="payment-summary__value">${formatCurrency(paket.hargaBase)}</span>
         </div>`;
       }
@@ -398,7 +398,7 @@ const BookingPage = {
         const subtotal = item.hargaSewa * item.qty;
         total += subtotal;
         rows += `<div class="payment-summary__row">
-          <span class="payment-summary__label">${item.nama} x${item.qty}</span>
+          <span class="payment-summary__label">${Components.escapeHTML(item.nama)} x${item.qty}</span>
           <span class="payment-summary__value">${formatCurrency(subtotal)}</span>
         </div>`;
       });
@@ -524,11 +524,11 @@ const BookingPage = {
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Nama Klien</label>
-              <div style="color: var(--text-primary); font-weight: 500;">${b.namaKlien}</div>
+              <div style="color: var(--text-primary); font-weight: 500;">${Components.escapeHTML(b.namaKlien)}</div>
             </div>
             <div class="form-group">
               <label class="form-label">Kontak</label>
-              <div style="color: var(--text-primary);">${b.kontak}</div>
+              <div style="color: var(--text-primary);">${Components.escapeHTML(b.kontak)}</div>
             </div>
           </div>
           <div class="form-row">
@@ -538,13 +538,13 @@ const BookingPage = {
             </div>
             <div class="form-group">
               <label class="form-label">Venue</label>
-              <div style="color: var(--text-primary);">${b.venue}</div>
+              <div style="color: var(--text-primary);">${Components.escapeHTML(b.venue)}</div>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Paket / Jenis</label>
-              <div style="color: var(--text-primary);">${b.paketNama || 'Mix & Match'}</div>
+              <div style="color: var(--text-primary);">${Components.escapeHTML(b.paketNama) || 'Mix & Match'}</div>
             </div>
             <div class="form-group">
               <label class="form-label">Status</label>

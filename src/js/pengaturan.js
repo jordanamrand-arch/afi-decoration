@@ -5,6 +5,7 @@
 const PengaturanPage = {
   render() {
     const creds = JSON.parse(localStorage.getItem('afi_credentials')) || { username: 'admin' };
+    const supabaseConfig = JSON.parse(localStorage.getItem('afi_supabase_config')) || { url: '', key: '' };
 
     return `
       <div class="page-header">
@@ -51,6 +52,32 @@ const PengaturanPage = {
             </div>
           </form>
         </div>
+
+        <div class="pengaturan-card slide-up" style="animation-delay: 0.1s;">
+          <h2 class="pengaturan-card-title">Konfigurasi Database Supabase</h2>
+          <p class="pengaturan-card-desc">Atur URL dan API Key untuk menghubungkan aplikasi ke database cloud Supabase.</p>
+          
+          <form id="supabase-form" class="pengaturan-form">
+            <div class="form-group">
+              <label class="form-label" for="setting-supabase-url">Supabase URL</label>
+              <input type="text" id="setting-supabase-url" class="form-input" value="${Components.escapeHTML(supabaseConfig.url)}" placeholder="https://xyz.supabase.co">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="setting-supabase-key">Supabase API Key</label>
+              <input type="password" id="setting-supabase-key" class="form-input" value="${Components.escapeHTML(supabaseConfig.key)}" placeholder="Masukkan anon key">
+            </div>
+
+            <div id="supabase-alert" class="pengaturan-alert"></div>
+
+            <div class="pengaturan-actions">
+              <button type="submit" id="btn-save-supabase" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Simpan Konfigurasi
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     `;
   },
@@ -64,6 +91,14 @@ const PengaturanPage = {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         this.saveCredentials();
+      });
+    }
+
+    const supabaseForm = page.querySelector('#supabase-form');
+    if (supabaseForm) {
+      supabaseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.saveSupabaseConfig();
       });
     }
   },
@@ -100,6 +135,29 @@ const PengaturanPage = {
 
     if (typeof Components !== 'undefined') {
       Components.toast('success', 'Berhasil', 'Kredensial akun telah diperbarui');
+    }
+  },
+
+  saveSupabaseConfig() {
+    const url = document.getElementById('setting-supabase-url').value.trim();
+    const key = document.getElementById('setting-supabase-key').value.trim();
+    const alertBox = document.getElementById('supabase-alert');
+
+    alertBox.className = 'pengaturan-alert';
+    alertBox.style.display = 'none';
+
+    const newConfig = { url, key };
+    localStorage.setItem('afi_supabase_config', JSON.stringify(newConfig));
+
+    alertBox.textContent = 'Konfigurasi Supabase berhasil disimpan! Silakan muat ulang halaman untuk menerapkan koneksi baru.';
+    alertBox.className = 'pengaturan-alert success';
+    
+    setTimeout(() => {
+      alertBox.className = 'pengaturan-alert';
+    }, 5000);
+
+    if (typeof Components !== 'undefined') {
+      Components.toast('success', 'Berhasil', 'Konfigurasi Supabase disimpan. Silakan reload aplikasi.');
     }
   },
 

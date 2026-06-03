@@ -154,7 +154,7 @@ const DashboardPage = {
       <div class="activity-item">
         <div class="activity-item__icon ${icon.class}">${icon.icon}</div>
         <div class="activity-item__content">
-          <div class="activity-item__text"><strong>${log.action}</strong> — ${log.detail}</div>
+          <div class="activity-item__text"><strong>${Components.escapeHTML(log.action)}</strong> — ${Components.escapeHTML(log.detail)}</div>
           <div class="activity-item__time">${timeAgo(log.timestamp)}</div>
         </div>
       </div>
@@ -182,11 +182,11 @@ const DashboardPage = {
           <span class="agenda-item__date-month">${month}</span>
         </div>
         <div class="agenda-item__info">
-          <div class="agenda-item__name">${booking.namaKlien}</div>
+          <div class="agenda-item__name">${Components.escapeHTML(booking.namaKlien)}</div>
           <div class="agenda-item__details">
             <span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              ${booking.venue}
+              ${Components.escapeHTML(booking.venue)}
             </span>
           </div>
           <div style="margin-top: 4px">${statusBadge}</div>

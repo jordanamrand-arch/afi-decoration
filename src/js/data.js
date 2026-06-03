@@ -14,8 +14,6 @@ const DataStore = {
   },
 
   // ── Supabase Config ──
-  supabaseUrl: 'https://zsemhbdlukxetlyjhgol.supabase.co',
-  supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzZW1oYmRsdWt4ZXRseWpoZ29sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMTc5ODIsImV4cCI6MjA5NTU5Mzk4Mn0.LPXemM8Cdumjj1ugneiw5_pObcpaxn0LVEbRcfasEAQ',
   client: null,
   isOnline: false,
   realtimeChannel: null,
@@ -34,8 +32,14 @@ const DataStore = {
 
     // 3. Initialize Supabase
     try {
+      const config = JSON.parse(localStorage.getItem('afi_supabase_config')) || { url: '', key: '' };
+      
+      if (!config.url || !config.key) {
+        throw new Error('Supabase configuration missing. Please setup in Settings.');
+      }
+
       if (typeof supabase !== 'undefined') {
-        this.client = supabase.createClient(this.supabaseUrl, this.supabaseKey);
+        this.client = supabase.createClient(config.url, config.key);
         this.setDbStatus('connecting', 'Menghubungkan...');
         await this.syncWithSupabase();
       } else {

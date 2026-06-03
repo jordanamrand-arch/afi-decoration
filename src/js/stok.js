@@ -136,8 +136,8 @@ const StokPage = {
       <div class="stok-item-row" data-id="${item.id}">
         <div class="stok-item__img">${emoji}</div>
         <div class="stok-item__info">
-          <div class="stok-item__name">${item.nama}</div>
-          <div class="stok-item__category">${item.kategori}</div>
+          <div class="stok-item__name">${Components.escapeHTML(item.nama)}</div>
+          <div class="stok-item__category">${Components.escapeHTML(item.kategori)}</div>
         </div>
         <div class="stok-item__stock">
           <div class="stok-item__stock-value">${item.stokTersedia || item.totalStok}</div>
@@ -159,12 +159,12 @@ const StokPage = {
       <div class="stok-item-row" data-id="${paket.id}">
         <div class="stok-item__img">📦</div>
         <div class="stok-item__info">
-          <div class="stok-item__name">${paket.nama}</div>
+          <div class="stok-item__name">${Components.escapeHTML(paket.nama)}</div>
           <div class="stok-item__category">${paket.komponen.length} komponen</div>
         </div>
         <div class="stok-item__price" style="flex: 1; text-align: left;">
           <div style="font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 2px;">Komponen:</div>
-          ${paket.komponen.map(k => `<span style="font-size: 11px; color: var(--text-secondary)">${k.nama} (${k.qty}x) </span>`).join('• ')}
+          ${paket.komponen.map(k => `<span style="font-size: 11px; color: var(--text-secondary)">${Components.escapeHTML(k.nama)} (${k.qty}x) </span>`).join('• ')}
         </div>
         <div class="stok-item__price">${formatCurrency(paket.hargaBase)}</div>
       </div>
@@ -221,7 +221,7 @@ const StokPage = {
     if (!item) return;
 
     Components.openModal({
-      title: `Ubah Kondisi: ${item.nama}`,
+      title: `Ubah Kondisi: ${Components.escapeHTML(item.nama)}`,
       content: `
         <div class="form-group">
           <label class="form-label">Status Kondisi</label>
@@ -325,7 +325,7 @@ const StokPage = {
             <div class="paket-composer__items" id="paket-komponen-list">
               <div class="paket-composer__item">
                 <select class="form-select paket-komponen-select" style="flex:1">
-                  ${stokItems.map(i => `<option value="${i.id}">${i.nama}</option>`).join('')}
+                  ${stokItems.map(i => `<option value="${i.id}">${Components.escapeHTML(i.nama)}</option>`).join('')}
                 </select>
                 <input type="number" class="form-input paket-komponen-qty" value="1" min="1" style="width: 70px;">
                 <button class="paket-composer__item-remove btn-remove-komponen">✕</button>
@@ -360,7 +360,7 @@ const StokPage = {
       row.className = 'paket-composer__item';
       row.innerHTML = `
         <select class="form-select paket-komponen-select" style="flex:1">
-          ${stokItems.map(i => `<option value="${i.id}">${i.nama}</option>`).join('')}
+          ${stokItems.map(i => `<option value="${i.id}">${Components.escapeHTML(i.nama)}</option>`).join('')}
         </select>
         <input type="number" class="form-input paket-komponen-qty" value="1" min="1" style="width: 70px;">
         <button class="paket-composer__item-remove btn-remove-komponen">✕</button>

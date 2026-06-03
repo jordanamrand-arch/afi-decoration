@@ -145,11 +145,11 @@ const KasPage = {
         <td>
           <div class="kas-category">
             <span class="kas-category__dot ${k.kategori}"></span>
-            ${categoryLabels[k.kategori] || k.kategori}
+            ${categoryLabels[k.kategori] || Components.escapeHTML(k.kategori)}
           </div>
         </td>
-        <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${k.keterangan}</td>
-        <td><span style="font-family: var(--font-mono); font-size: 11px;">${k.nota || '-'}</span></td>
+        <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${Components.escapeHTML(k.keterangan)}</td>
+        <td><span style="font-family: var(--font-mono); font-size: 11px;">${Components.escapeHTML(k.nota) || '-'}</span></td>
         <td class="text-right amount ${k.tipe}">
           ${isInflow ? '+' : '-'} ${formatCurrency(k.nominal)}
         </td>
