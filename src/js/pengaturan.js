@@ -107,7 +107,7 @@ const PengaturanPage = {
     const alertBox = document.getElementById('pengaturan-alert');
     if (alertBox) {
       alertBox.textContent = message;
-      alertBox.className = \`pengaturan-alert \${type}\`;
+      alertBox.className = `pengaturan-alert ${type}`;
       
       // Hide alert after 5 seconds
       setTimeout(() => {
