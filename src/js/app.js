@@ -10,6 +10,7 @@ const App = {
     booking: { module: 'BookingPage', label: 'Booking' },
     stok: { module: 'StokPage', label: 'Manajemen Stok' },
     kas: { module: 'KasPage', label: 'Arus Kas' },
+    pengaturan: { module: 'PengaturanPage', label: 'Pengaturan' },
   },
 
   init() {
@@ -53,6 +54,7 @@ const App = {
       booking: BookingPage,
       stok: StokPage,
       kas: KasPage,
+      pengaturan: PengaturanPage,
     };
     const pageEl = document.getElementById(`page-${this.currentPage}`);
     const module = moduleMap[this.currentPage];
@@ -90,6 +92,7 @@ const App = {
         booking: BookingPage,
         stok: StokPage,
         kas: KasPage,
+        pengaturan: PengaturanPage,
       };
       const module = moduleMap[page];
       if (module) {
@@ -151,5 +154,5 @@ const App = {
 
 // ── Start App ──
 document.addEventListener('DOMContentLoaded', () => {
-  App.init();
+  Login.init(); // Initialize login system first
 });
